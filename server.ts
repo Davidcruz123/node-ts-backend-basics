@@ -5,6 +5,7 @@ import cors from 'cors';
 import errorHandler from './middleware/errorHandler';
 import router from './routes/subdir';
 import rootRouter from './routes/root';
+import employeesRouter from './routes/api/employees';
 const app = express();
 const PORT = 3500;
 
@@ -35,7 +36,7 @@ app.use('/subdir',express.static(path.join(__dirname,'/public')))
 // routes
 app.use('/',rootRouter)
 app.use('/subdir',router)
-// app.use('/employees', )
+app.use('/employees', employeesRouter)
 
 // error handling
 app.all('*',(req,res)=> {   
