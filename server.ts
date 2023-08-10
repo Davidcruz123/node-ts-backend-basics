@@ -7,28 +7,31 @@ import router from './routes/subdir';
 import rootRouter from './routes/root';
 import employeesRouter from './routes/api/employees';
 import corsOptions from './config/corsOptions';
+import registerRouter from './routes/register';
+import authRouter from './routes/auth';
 const app = express();
 const PORT = 3500;
 
 
 // custom middleware
-app.use(logger)
+app.use(logger);
 // Cross Origin Resource Sharing
 
-app.use(cors(corsOptions))
+app.use(cors(corsOptions));
 
 // built in middleware
-app.use(express.urlencoded({extended:false}))// get data when form data is submitted
+app.use(express.urlencoded({extended:false}));// get data when form data is submitted
 app.use(express.json());
 // serve static files
-app.use('/',express.static(path.join(__dirname,'/public')))
-app.use('/subdir',express.static(path.join(__dirname,'/public')))
+app.use('/',express.static(path.join(__dirname,'/public')));
+app.use('/subdir',express.static(path.join(__dirname,'/public')));
 
 // routes
-app.use('/',rootRouter)
-app.use('/subdir',router)
-app.use('/employees', employeesRouter)
-
+app.use('/',rootRouter);
+app.use('/subdir',router); // just a test router
+app.use('/register', registerRouter);
+app.use('/auth', authRouter);
+app.use('/employees', employeesRouter);
 // error handling
 app.all('*',(req,res)=> {   
     res.status(404);
@@ -39,15 +42,15 @@ app.all('*',(req,res)=> {
     } else {
         res.type('txt').send('404 Not found');
     }
-})
+});
 // using middleware
-app.use(errorHandler)
+app.use(errorHandler);
 
 
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
-})
+});
 
 
 

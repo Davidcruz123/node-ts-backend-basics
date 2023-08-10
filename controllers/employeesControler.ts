@@ -1,16 +1,9 @@
 import { Request, Response } from "express";
-interface Employee {
-    id: number;
-    firstname: string;
-    lastname: string
-}
-interface Data {
-    employees: Employee[];
+import { Employee, Employees } from "../models";
 
-}
 
-const data: Data = {
-    employees: require('../model/employees.json'),
+const data: Employees = {
+    employees: require('../data/employees.json'),
 };
 
 
