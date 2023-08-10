@@ -9,6 +9,7 @@ import employeesRouter from './routes/api/employees';
 import corsOptions from './config/corsOptions';
 import registerRouter from './routes/register';
 import authRouter from './routes/auth';
+import veryfyJWT from './middleware/verifyJWT';
 const app = express();
 const PORT = 3500;
 
@@ -31,6 +32,7 @@ app.use('/',rootRouter);
 app.use('/subdir',router); // just a test router
 app.use('/register', registerRouter);
 app.use('/auth', authRouter);
+app.use(veryfyJWT); //now all employees routes are protected by jwt
 app.use('/employees', employeesRouter);
 // error handling
 app.all('*',(req,res)=> {   
