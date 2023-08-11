@@ -55,6 +55,7 @@ const handleLogin = async (req: Request, res: Response) => {
         ) ;
         // now it is not available to js
         res.cookie('jwt',refreshToken, {httpOnly:true, maxAge:24*60*60*1000, sameSite: 'none', secure: true}) // maxAge ms
+        // delete secure:true to work with some simulators like thunderClient, it is needed to chrome
         res.json({ accessToken }) 
     } else {
         res.sendStatus(401);
