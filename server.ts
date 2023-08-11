@@ -12,6 +12,7 @@ import authRouter from './routes/auth';
 import veryfyJWT from './middleware/verifyJWT';
 import cookieParser from 'cookie-parser';
 import refreshRouter from './routes/refresh';
+import logoutRouter from './routes/logout';
 const app = express();
 const PORT = 3500;
 
@@ -39,6 +40,7 @@ app.use('/subdir',router); // just a test router
 app.use('/register', registerRouter);
 app.use('/auth', authRouter);
 app.use('/refresh',refreshRouter);
+app.use('/logout',logoutRouter);
 
 app.use(veryfyJWT); //now all employees routes are protected by jwt
 app.use('/employees', employeesRouter);

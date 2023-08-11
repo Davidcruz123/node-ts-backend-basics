@@ -15,8 +15,7 @@ const usersDb = {
 
 const handleRefreshToken =  (req: Request, res: Response) => {
     const cookies = req.cookies;
-    if (!cookies?.jwt) return res.status(401);
-    console.log('refresh token cookies',cookies.jwt);
+    if (!cookies?.jwt) return res.sendStatus(401);
     const refreshToken = cookies.jwt;
     const foundUser:User|undefined = usersDb.users.find((user: User) => user.refreshToken === refreshToken);
     if (!foundUser) return res.sendStatus(403); // Forbidden
