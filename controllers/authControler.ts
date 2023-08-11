@@ -50,7 +50,7 @@ const handleLogin = async (req: Request, res: Response) => {
             JSON.stringify(usersDb.users)
         ) ;
         // now it is not available to js
-        res.cookie('jwt',refreshToken, {httpOnly:true, maxAge:24*60*60*1000}) // maxAge ms
+        res.cookie('jwt',refreshToken, {httpOnly:true, maxAge:24*60*60*1000, sameSite: 'none', secure: true}) // maxAge ms
         res.json({ accessToken }) 
     } else {
         res.sendStatus(401);

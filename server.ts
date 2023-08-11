@@ -13,12 +13,16 @@ import veryfyJWT from './middleware/verifyJWT';
 import cookieParser from 'cookie-parser';
 import refreshRouter from './routes/refresh';
 import logoutRouter from './routes/logout';
+import credentials from './middleware/credentials';
 const app = express();
 const PORT = 3500;
 
 
 // custom middleware
 app.use(logger);
+// Handle options credentials check before CORS! and fetch cookies credentials requirements
+// it goes before cors, because if that header is not set, it throws error
+app.use(credentials);
 // Cross Origin Resource Sharing
 app.use(cors(corsOptions));
 
