@@ -5,11 +5,11 @@ import { UserRequest } from '../models';
 dotenv.config();
 
 const veryfyJWT = (req:UserRequest,res:Response,next:NextFunction)=> {
-    console.log('headers',req.headers)
+    // console.log('headers',req.headers)
     const authHeader = req.headers['authorization'];
     if (!authHeader) return res.sendStatus(401);
 
-    console.log(authHeader);// Bearer token
+    // console.log(authHeader);// Bearer token
     const token = authHeader.split(' ')[1];
     jwt.verify(
         token,

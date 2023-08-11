@@ -10,6 +10,8 @@ import corsOptions from './config/corsOptions';
 import registerRouter from './routes/register';
 import authRouter from './routes/auth';
 import veryfyJWT from './middleware/verifyJWT';
+import cookieParser from 'cookie-parser';
+import refreshRouter from './routes/refresh';
 const app = express();
 const PORT = 3500;
 
@@ -17,12 +19,16 @@ const PORT = 3500;
 // custom middleware
 app.use(logger);
 // Cross Origin Resource Sharing
-
 app.use(cors(corsOptions));
 
-// built in middleware
+// built in middleware to handle urlencoded form data
 app.use(express.urlencoded({extended:false}));// get data when form data is submitted
+// built in middleware for json
 app.use(express.json());
+//midleware for cookies
+app.use(cookieParser())
+
+
 // serve static files
 app.use('/',express.static(path.join(__dirname,'/public')));
 app.use('/subdir',express.static(path.join(__dirname,'/public')));
@@ -32,6 +38,8 @@ app.use('/',rootRouter);
 app.use('/subdir',router); // just a test router
 app.use('/register', registerRouter);
 app.use('/auth', authRouter);
+app.use('/refresh',refreshRouter);
+
 app.use(veryfyJWT); //now all employees routes are protected by jwt
 app.use('/employees', employeesRouter);
 // error handling
