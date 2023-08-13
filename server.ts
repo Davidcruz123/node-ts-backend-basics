@@ -1,4 +1,5 @@
 import express from 'express';
+import * as dotenv from 'dotenv';
 import path from 'path';
 import {logger} from './middleware/logEvents';
 import cors from 'cors';
@@ -14,9 +15,14 @@ import cookieParser from 'cookie-parser';
 import refreshRouter from './routes/refresh';
 import logoutRouter from './routes/logout';
 import credentials from './middleware/credentials';
+import mongoose from 'mongoose';
+import connectDb from './config/dbConn';
+dotenv.config(); // it does not have to be imported in each file
 const app = express();
 const PORT = 3500;
 
+//Conenct to Mongodb
+ connectDb();
 
 // custom middleware
 app.use(logger);
@@ -63,10 +69,13 @@ app.all('*',(req,res)=> {
 app.use(errorHandler);
 
 
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`)
-});
+mongoose.connection.once('open', ()=> {
+    console.log('Connected to MongoDB');
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`)
+    });
+    
+})
 
 
 
@@ -88,3 +97,5 @@ app.listen(PORT, () => {
 // }
 
 // app.get('/chain',[one,two,three])
+
+

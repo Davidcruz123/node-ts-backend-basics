@@ -1,8 +1,7 @@
 import { Response,NextFunction } from 'express';
-import * as dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import {  UserRequest } from '../models';
-dotenv.config();
+
 
 const veryfyJWT = (req:UserRequest,res:Response,next:NextFunction)=> {
     const authHeader = (req.headers.authorization || req.headers.Authorization) as string;

@@ -5,9 +5,6 @@ import jwt from 'jsonwebtoken';
 import fs from 'fs';
 import path from 'path';
 const fsPromises = fs.promises;
-import * as dotenv from 'dotenv';
-
-dotenv.config();
 
 
 

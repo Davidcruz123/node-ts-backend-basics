@@ -3,9 +3,6 @@ import { Request, Response } from 'express';
 import { User } from '../models';
 import jwt from 'jsonwebtoken';
 
-import * as dotenv from 'dotenv';
-
-dotenv.config();
 
 
 
