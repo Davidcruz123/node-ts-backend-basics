@@ -1,5 +1,5 @@
 import { Request } from 'express'; 
-
+// import { JwtPayload } from 'jsonwebtoken';
 export interface User {
     username:string;
     password:string;
@@ -9,12 +9,26 @@ export interface User {
 
 export interface UserRequest extends Request {
     user?: string; 
-    roles?:number[];
+    roles?:RoleCode[];
   }
 
 export interface Roles {
-    Admin?: 5150,
-    Editor?: 1984,
-    User?: 2001
+    Admin?: RoleCode.Admin,
+    Editor?: RoleCode.Editor,
+    User?: RoleCode.User
 }
 
+
+export enum RoleCode {
+    Admin = 5150,
+    Editor = 1984,
+    User = 2001
+}
+
+export interface UserInfo {
+    username:string;
+    roles: RoleCode[];
+}
+
+
+// export interface DecodedToken extends JwtPayload, UserInfo {}

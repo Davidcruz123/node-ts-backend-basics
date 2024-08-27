@@ -30,17 +30,17 @@ const getEmployee = async (req: Request, res: Response) => {
 
 const createNewEmployee = async (req: Request, res: Response) => {
     const newEmployee: Employee = {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
     }
 
-    if (!newEmployee.firstname || !newEmployee.lastname) {
+    if (!newEmployee.firstName || !newEmployee.lastName) {
         return res.status(404).json({ 'message': 'First and last names are required' })
     }
     const result = await EmployeesMongooseModel.create({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname    });
-    if (result.firstname) {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName    });
+    if (result.firstName) {
         res.status(201).json({"success":"New employee created "}); // 201 new record
     } else {
         res.sendStatus(400);
@@ -55,8 +55,8 @@ const updateEmployee = async (req: Request, res: Response) => {
     } else {
         const result = await EmployeesMongooseModel.updateOne({_id: req.body.id}, { 
             $set: {
-                firstname:  req.body.firstname || currentEmployee.firstname,
-                lastname: req.body.lastname || currentEmployee.lastname
+                firstName:  req.body.firstName || currentEmployee.firstName,
+                lastName: req.body.lastName || currentEmployee.lastName
             }
         }).exec();
         if (result.acknowledged) {

@@ -7,3 +7,5 @@ Routes: Define clear and intuitive URL mappings to facilitate effective communic
 Middleware: Employ middleware functions to manage tasks before or after the primary request-handling logic, including authentication, logging, and error handling.
 
 Security: Implement best practices for securing your application, covering aspects like user authentication, authorization, and protection against common vulnerabilities.
+
+Use node 14 or newer
